@@ -2,7 +2,7 @@
 
 ### 算法思想
 
-- [双指针](https://github.com/fsodu/leetcode/tree/main/Two_Pointer)
+- [双指针](https://github.com/fsodu/leetcode/tree/main/Two%20Pointer)
 - [排序](https://github.com/fsodu/leetcode/tree/main/Sorting)
 - 贪心思想
 - 二分查找
