@@ -3,7 +3,7 @@
 ### 算法思想
 
 - 双指针
-- [排序](leetcode/sorting)
+- [排序](https://github.com/fsodu/leetcode/tree/main/Sorting)
 - 贪心思想
 - 二分查找
 - 分治
