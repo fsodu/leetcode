@@ -4,7 +4,7 @@
 
 - [双指针](https://github.com/fsodu/leetcode/tree/main/Two%20Pointer)
 - [排序](https://github.com/fsodu/leetcode/tree/main/Sorting)
-- 贪心思想
+- [贪心思想](https://github.com/tianhuih/leetcode/tree/main/Greedy%20Algorithm)
 - 二分查找
 - 分治
 - 搜索
