@@ -2,10 +2,10 @@
 
 ### 算法思想
 
-- [双指针](https://github.com/fsodu/leetcode/tree/main/Two%20Pointer)
-- [排序](https://github.com/fsodu/leetcode/tree/main/Sorting)
-- [贪心思想](https://github.com/tianhuih/leetcode/tree/main/Greedy%20Algorithm)
-- 二分查找
+- [双指针 Two Pointers](https://github.com/fsodu/leetcode/tree/main/Two%20Pointer)
+- [排序 Sorting](https://github.com/fsodu/leetcode/tree/main/Sorting)
+- [贪心思想 Greedy Algorithms](https://github.com/tianhuih/leetcode/tree/main/Greedy%20Algorithm)
+- [二分查找 Binary Search](https://github.com/tianhuih/leetcode/tree/main/Binary%20Search)
 - 分治
 - 搜索
 - 动态规划
