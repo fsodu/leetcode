@@ -1,0 +1,30 @@
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        
+        if (nums.length == 1) return nums[0];
+        
+        int left = 0, right = nums.length - 1; 
+        
+        while (left < right) {
+            int middle = left + (right - left) / 2; 
+            boolean odd = ((middle + 1) % 2 == 1);
+            
+            int pre = Math.max(0, middle - 1);
+            int post = Math.min(nums.length - 1, middle + 1);
+            
+            if (nums[middle] == nums[pre]) {
+                left = (odd) ? left : post;
+                right = (odd) ? pre : right; 
+            } else if (nums[middle] == nums[post]) {
+                left = (odd) ? post : left; 
+                right = (odd) ? right : pre; 
+            } else {
+                return nums[middle];
+            }
+        }
+        
+        return nums[left];
+        
+    }
+
+}
