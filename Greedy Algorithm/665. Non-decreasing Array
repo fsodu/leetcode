@@ -1,0 +1,26 @@
+class Solution {
+    public boolean checkPossibility(int[] nums) {
+        if (nums.length == 1) return true; 
+        
+        boolean changed = false; 
+        int index = 0; 
+        
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                if (changed) return false; 
+                else {
+                    index = i;
+                    changed = true; 
+                }
+            }
+        }
+        
+        if (index > 0) {
+            if (nums[index - 1] <= nums[index + 1] || index == nums.length - 2) return true; 
+            if (nums[index] <= nums[index + 2]) return true; 
+            else return false; 
+        }
+        
+        return true; 
+    }
+}
