@@ -1,0 +1,47 @@
+class Solution {
+    
+    private boolean res = true; 
+    
+    public boolean isBalanced(TreeNode root) {
+        
+        height(root);
+        return res;
+    }
+    
+    public int height(TreeNode root) {
+        
+        if (root == null) return 0; 
+        int left = height(root.left);
+        int right = height(root.right);
+        if (Math.abs(left - right) > 1) {
+            res = false; 
+            return -1;
+        }
+        return 1 + Math.max(left, right);
+    }
+    
+}
+
+
+/* this solution is WRONG!!
+
+class Solution {
+    
+    
+    public boolean isBalanced(TreeNode root) {
+        
+        if (root == null) return true; 
+        
+        return (Math.abs(height(root.left) - height(root.right)) <= 1);
+    }
+    
+    public int height(TreeNode root) {
+        
+        if (root == null) return 0; 
+        return 1 + Math.max(height(root.left), height(root.right));
+    }
+    
+}
+
+
+*/
