@@ -2,13 +2,13 @@
 
 ### 算法思想
 
-- [双指针 Two Pointers](https://github.com/fsodu/leetcode/tree/main/Two%20Pointer)
 - [排序 Sorting](https://github.com/fsodu/leetcode/tree/main/Sorting)
-- [贪心思想 Greedy Algorithms](https://github.com/tianhuih/leetcode/tree/main/Greedy%20Algorithm)
-- [二分查找 Binary Search](https://github.com/tianhuih/leetcode/tree/main/Binary%20Search)
-- [分治 Divide-and-Conquer Algorithm](https://github.com/tianhuih/leetcode/tree/main/Divide-and-Conquer%20Algorithm)
 - 搜索
+- [二分查找 Binary Search](https://github.com/tianhuih/leetcode/tree/main/Binary%20Search)
+- [双指针 Two Pointers](https://github.com/fsodu/leetcode/tree/main/Two%20Pointer)
+- [分治 Divide-and-Conquer Algorithm](https://github.com/tianhuih/leetcode/tree/main/Divide-and-Conquer%20Algorithm)
 - 动态规划
+- [贪心思想 Greedy Algorithms](https://github.com/tianhuih/leetcode/tree/main/Greedy%20Algorithm)
 - 数学
 
 ### 数据结构相关
