@@ -13,6 +13,31 @@
  *     }
  * }
  */
+ 
+ 
+/* DP Solution */
+class Solution {
+    
+    Map<TreeNode, Integer> map = new HashMap<>();
+    
+    public int rob(TreeNode root) {
+        if (root == null) return 0; 
+        if (map.containsKey(root)) return map.get(root);
+        
+        int rob = root.val; 
+        if (root.left != null) rob += rob(root.left.left) + rob(root.left.right);
+        if (root.right != null) rob += rob(root.right.left) + rob(root.right.right);
+        
+        int notRob = rob(root.left) + rob(root.right);
+        int res = Math.max(rob, notRob); 
+        map.put(root, res);
+        return res; 
+    }
+}
+
+
+/* EXCEED TIME LIMIT!! */
+
 class Solution {
     public int rob(TreeNode root) {
         return Math.max(robRoot(root), robNoRoot(root));
@@ -31,7 +56,7 @@ class Solution {
     }
 }
 
-/* EXCEED TIME LIMIT!! */
+
 
 
 
