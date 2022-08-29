@@ -14,7 +14,7 @@
 ### 数据结构相关
 
 - 链表
-- [树](https://github.com/tianhuih/leetcode/tree/main/Trees)
+- [树 Tree](https://github.com/tianhuih/leetcode/tree/main/Trees)
 - 栈和队列
 - 哈希表
 - 字符串
