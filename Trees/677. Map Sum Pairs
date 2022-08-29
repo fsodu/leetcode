@@ -1,0 +1,59 @@
+class MapSum {
+    
+    private class Node {
+        Node[] childs = new Node[26];
+        boolean isLeaf; 
+        int val; 
+    }
+
+    public Node root; 
+    
+    public MapSum() {
+        root = new Node();
+    }
+    
+    public void insert(String key, int val) {
+        Node curr = root;
+        int searchRes = search(key);
+        int add = (searchRes == -1) ? val : (val - searchRes); 
+        for (char c : key.toCharArray()) {
+            if (curr.childs[c - 'a'] == null) curr.childs[c - 'a'] = new Node();
+            curr = curr.childs[c - 'a'];
+            curr.val += add; 
+        }
+        curr.isLeaf = true; 
+    }
+    
+    public int search(String key) {
+        Node curr = root; 
+        for (char c : key.toCharArray()) {
+            if (curr.childs[c - 'a'] == null) return -1; 
+            curr = curr.childs[c - 'a'];
+        }
+        if (!curr.isLeaf) return -1; 
+        int childValue = 0;
+        for (Node child : curr.childs) {
+            if (child != null) {
+                childValue = child.val;
+                break;
+            }
+        }
+        return curr.val - childValue; 
+    }
+    
+    public int sum(String prefix) {
+        Node curr = root; 
+        for (char c : prefix.toCharArray()) {
+            if (curr.childs[c - 'a'] == null) return 0; 
+            curr = curr.childs[c - 'a'];
+        }
+        return curr.val; 
+    }
+}
+
+/**
+ * Your MapSum object will be instantiated and called as such:
+ * MapSum obj = new MapSum();
+ * obj.insert(key,val);
+ * int param_2 = obj.sum(prefix);
+ */
