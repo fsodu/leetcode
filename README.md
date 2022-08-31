@@ -3,7 +3,7 @@
 ### 算法思想
 
 - [排序 Sorting](https://github.com/fsodu/leetcode/tree/main/Sorting)
-- 搜索
+- [搜索](https://github.com/fsodu/leetcode/tree/main/Searching)
 - [二分查找 Binary Search](https://github.com/tianhuih/leetcode/tree/main/Binary%20Search)
 - [双指针 Two Pointers](https://github.com/fsodu/leetcode/tree/main/Two%20Pointer)
 - [分治 Divide-and-Conquer Algorithm](https://github.com/tianhuih/leetcode/tree/main/Divide-and-Conquer%20Algorithm)
