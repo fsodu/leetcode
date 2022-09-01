@@ -1,0 +1,29 @@
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+        
+        int province = 0;
+
+        for (int i = 0; i < isConnected.length; i++) {
+            for (int j = i; j < isConnected[0].length; j++) {
+                if (dfs(isConnected, i, j, 0) != 0) province++;
+            }
+        }
+        
+        return province; 
+    }
+    
+    public int dfs(int[][] isConnected, int i, int j, int cnt) {
+        if (i < 0 || i >= isConnected.length || j < 0 || j >= isConnected[0].length 
+            || isConnected[i][j] == 0) return cnt; 
+        isConnected[i][j] = 0;
+        cnt++;
+        for (int a = 0; a < isConnected[0].length; a++) {
+            cnt = dfs(isConnected, i, a, cnt);
+        }
+        for (int a = 0; a < isConnected.length; a++) {
+            cnt = dfs(isConnected, a, j, cnt);
+        }
+        return cnt; 
+    }
+    
+}
