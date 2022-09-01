@@ -1,0 +1,42 @@
+class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        
+        if (wordList == null) return 0; 
+        if (beginWord.length() != endWord.length()) return 0; 
+            
+        Queue<String> q = new ArrayDeque<>();
+        boolean[] visited = new boolean[wordList.size()];
+        q.offer(beginWord);
+        int count = 1; 
+        
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                String curr = q.poll();
+                for (int j = 0; j < wordList.size(); j++) {
+                    String s = wordList.get(j);
+                    if (visited[j] == true) continue;
+                    if (adjacent(curr, s)) {
+                        if (s.equals(endWord)) return count + 1; 
+                        q.offer(s);
+                        visited[j] = true; 
+                    }
+                }
+            }
+            count++;
+        }
+        
+        return 0; 
+    }
+    
+    public boolean adjacent(String a, String b) {
+        if (a.length() != b.length()) return false; 
+        boolean diff = false; 
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) - b.charAt(i) == 0) continue;
+            if (diff) return false; 
+            diff = true; 
+        }
+        return diff; 
+    }
+}
