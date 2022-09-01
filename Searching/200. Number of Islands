@@ -1,0 +1,29 @@
+class Solution {
+    
+    int[][] DIR = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    
+    public int numIslands(char[][] grid) {
+        int cnt = 0; 
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (dfs(grid, i, j, 0) != 0) {
+                    cnt++; 
+                    System.out.println(i + ", " + j);
+                }
+            }
+        }
+        
+        return cnt;
+        
+    }
+    
+    public int dfs(char[][] grid, int a, int b, int size) {
+        if (a < 0 || a >= grid.length || b < 0 || b >= grid[0].length || grid[a][b] - '0' == 0) return size;
+        grid[a][b] = '0'; 
+        size++;
+        for (int[] d : DIR) {
+            size = dfs(grid, a + d[0], b + d[1], size);
+        }
+        return size; 
+    }
+}
