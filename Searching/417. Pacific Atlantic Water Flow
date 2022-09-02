@@ -1,0 +1,49 @@
+class Solution {
+    
+    private int[][] DIR = new int[][]{{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+    private int[][] canFlow;
+        
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        
+        List<List<Integer>> res = new ArrayList<>();
+        
+        if (heights == null || heights.length == 0 || heights[0].length == 0) return res; 
+        
+        canFlow = new int[heights.length][heights[0].length];
+        
+        searchBorder(heights, 0, 0, 1);
+        searchBorder(heights, heights.length - 1, heights[0].length - 1, -1);
+        
+        for (int i = 0; i < heights.length; i++) {
+            for (int j = 0; j < heights[0].length; j++) {
+                if (canFlow[i][j] == 2) res.add(Arrays.asList(i, j));
+            }
+        }
+        
+        return res; 
+        
+    }
+    
+    public void searchBorder(int[][] heights, int row, int col, int flowDex) {
+        for (int i = 0; i < heights[0].length; i++) {
+            dfs(heights, row, i, flowDex);
+        }
+        for (int i = 0; i < heights.length; i++) {
+            dfs(heights, i, col, flowDex);
+        }
+    }
+    
+    public void dfs(int[][] heights, int a, int b, int flowDex) {
+        if (canFlow[a][b] == 2) return;
+        canFlow[a][b] = (flowDex == -1 && canFlow[a][b] == 1) ? 2 : flowDex; 
+        
+        for (int[] d : DIR) {
+            int row = a + d[0]; 
+            int col = b + d[1]; 
+            if (row < 0 || row >= heights.length || col < 0 || col >= heights[0].length) continue; 
+            if (heights[row][col] < heights[a][b] || canFlow[row][col] == flowDex) continue; 
+            dfs(heights, row, col, flowDex);
+        }
+    }
+    
+}
