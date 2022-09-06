@@ -1,0 +1,40 @@
+class Solution {
+    public List<String> restoreIpAddresses(String s) {
+        int size = s.length();
+        List<String> output = new ArrayList<>();
+        if (size < 4 || size > 12) return output; 
+        backtrack(s, new String(), 0, 0, output);
+        return output; 
+    }
+    
+    public void backtrack(String s, String address, int index, int count, List<String> output) {
+        if (count == 4) {
+            if (index == s.length()) {
+                address = address.substring(1, address.length());
+                output.add(address);
+            }
+            return; 
+        }
+        
+        String curr = "";
+        int lastSize = address.length();
+        
+        for (int i = 0; i < 3; i++) {
+            if (index + i >= s.length()) break; 
+            curr += s.charAt(index + i);
+            if (Integer.valueOf(curr) > 255) continue;
+            else if (i > 0 && curr.charAt(0) == '0') continue; 
+            else if (Integer.valueOf(curr) == 0) address += ".0";
+            else address = address + "." + curr;
+            
+            count++;
+            index += (i + 1);
+            backtrack(s, address, index, count, output);
+            address = address.substring(0, lastSize);
+            count--;
+            index -= (i + 1);
+        }
+
+    }
+    
+}
