@@ -1,0 +1,22 @@
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (k > n || n == 0) return result; 
+        backtrack(n, k, 1, new ArrayList<>(), result);
+        return result;
+    }
+    
+    public void backtrack(int n, int k, int start, List<Integer> temp, List<List<Integer>> result) {
+        if (k == 0) {
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        for (int i = start; i <= n - k + 1; i++) {
+            temp.add(i);
+            backtrack(n, k - 1, i + 1, temp, result);
+            temp.remove(temp.size() - 1);
+        }
+        
+    }
+}
