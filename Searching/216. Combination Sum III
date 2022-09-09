@@ -1,0 +1,22 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (n == 0) return result;
+        backtrack(k, n, 1, new ArrayList<>(), result);
+        return result; 
+    }
+    
+    public void backtrack(int cnt, int sum, int start, 
+                          List<Integer> temp, List<List<Integer>> result) {
+        if (sum == 0 && cnt == 0) {
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int i = start; i <= 10 - cnt; i++) {
+            if (i > sum) break;
+            temp.add(i);
+            backtrack(cnt - 1, sum - i, i + 1, temp, result);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
