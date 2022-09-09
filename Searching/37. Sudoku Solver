@@ -1,0 +1,55 @@
+class Solution {
+    
+    private boolean[][] rnums = new boolean[9][10];
+    private boolean[][] cnums = new boolean[9][10];
+    private boolean[][] gnums = new boolean[9][10];
+    
+    public void solveSudoku(char[][] board) {
+        char[][] filled = new char[9][9];
+        
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '.') continue; 
+                int val = board[i][j] - '0';
+                rnums[i][val] = true;
+                cnums[j][val] = true; 
+                gnums[cube(i, j)][val] = true; 
+            }
+        }
+        int[] first = findNext(board, 0, 0);
+        backtrack(board, first[0], first[1]);    
+    }
+    
+    public boolean backtrack(char[][] board, int row, int col) {
+        if (row == -1 && col == -1) return true; 
+        
+        for (int i = 1; i < 10; i++) {
+            if (rnums[row][i] || cnums[col][i] || gnums[cube(row, col)][i]) continue; 
+            
+            board[row][col] = (char)(i + '0');
+            rnums[row][i] = cnums[col][i] = gnums[cube(row, col)][i] = true;
+            
+            int[] next = findNext(board, row, col);
+            if (backtrack(board, next[0], next[1])) return true; 
+            
+            board[row][col] = '.';
+            rnums[row][i] = cnums[col][i] = gnums[cube(row, col)][i] = false;
+        }
+        return false; 
+    }
+    
+    public int cube(int a, int b) {
+        int row = a / 3; 
+        int col = b / 3; 
+        return row * 3 + col; 
+    }
+    
+    public int[] findNext(char[][] board, int row, int col) {
+        while (row < 9 && board[row][col] != '.') {
+            row = (col == 8) ? row + 1 : row; 
+            col = (col == 8) ? 0 : col + 1;
+        }
+        if (row == 9) return new int[]{-1, -1};
+        return new int[]{row, col};
+    }
+}
