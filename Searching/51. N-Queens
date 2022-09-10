@@ -1,0 +1,58 @@
+class Solution {
+    
+    private boolean[] qrow; 
+    private boolean[] qcol;
+    private boolean[] qleft;
+    private boolean[] qright; 
+    
+    public List<List<String>> solveNQueens(int n) {        
+        List<List<String>> result = new ArrayList<>();
+        if (n == 0) return result; 
+        
+        qrow = new boolean[n];
+        qcol = new boolean[n];
+        qleft = new boolean[2 * n - 1];
+        qright = new boolean[2 * n - 1];
+        
+            
+        char[][] temp = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                temp[i][j] = '.';
+            }
+        }
+        backtrack(temp, 0, result);
+        
+        return result; 
+    }
+    
+    public void backtrack(char[][] temp, int row, List<List<String>> result) {
+        int n = qrow.length; 
+        if (row == n) {
+            List<String> solution = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                String line = "";
+                for (int j = 0; j < n; j++) {
+                    line += temp[i][j];
+                }
+                solution.add(line);
+            }
+            result.add(solution);
+            return;
+        }
+        
+        for (int col = 0; col < n; col++) {
+            
+            if (qrow[row] || qcol[col] 
+                || qleft[row - col + n - 1] || qright[row + col]) continue; 
+            
+            temp[row][col] = 'Q';
+            qrow[row] = qcol[col] = qleft[row - col + n - 1] = qright[row + col] = true; 
+            
+            backtrack(temp, row + 1, result);
+            
+            temp[row][col] = '.';
+            qrow[row] = qcol[col] = qleft[row - col + n - 1] = qright[row + col] = false; 
+        }
+    }
+}
