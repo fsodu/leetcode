@@ -7,7 +7,7 @@
 - [二分查找 Binary Search](https://github.com/tianhuih/leetcode/tree/main/Binary%20Search)
 - [双指针 Two Pointers](https://github.com/fsodu/leetcode/tree/main/Two%20Pointer)
 - [分治 Divide-and-Conquer Algorithm](https://github.com/tianhuih/leetcode/tree/main/Divide-and-Conquer%20Algorithm)
-- 动态规划
+- [动态规划](https://github.com/tianhuih/leetcode/tree/main/dynamic%20programming)
 - [贪心思想 Greedy Algorithms](https://github.com/tianhuih/leetcode/tree/main/Greedy%20Algorithm)
 - 数学
 
