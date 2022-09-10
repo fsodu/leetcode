@@ -1,0 +1,36 @@
+class Solution {
+    public int rob(int[] nums) {
+        if (nums.length == 1) return nums[0];
+        if (nums.length == 2) return Math.max(nums[0], nums[1]);
+        
+        int[] money = new int[nums.length]; 
+        money[nums.length - 1] = nums[nums.length - 1];
+        money[nums.length - 2] = Math.max(nums[nums.length - 1], nums[nums.length - 2]);
+        
+         for (int i = nums.length - 3; i >= 0; i--) {
+            money[i] = Math.max(nums[i] + money[i + 2], money[i + 1]);
+        }
+        
+        return money[0];
+    }
+    
+}
+
+class Solution {
+    public int rob(int[] nums) {
+        if (nums.length == 1) return nums[0];
+        if (nums.length == 2) return Math.max(nums[0], nums[1]);
+        
+        int pre1 = nums[nums.length - 1];
+        int pre2 = Math.max(nums[nums.length - 1], nums[nums.length - 2]);
+        
+        for (int i = nums.length - 3; i >= 0; i--) {
+            int curr = Math.max(nums[i] + pre1, pre2);
+            pre1 = pre2; 
+            pre2 = curr; 
+        }
+        
+        return pre2;
+    }
+    
+}
