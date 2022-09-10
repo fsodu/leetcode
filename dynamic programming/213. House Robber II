@@ -1,0 +1,20 @@
+class Solution {
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) return 0; 
+        if (nums.length == 1) return nums[0];
+        return Math.max(rob(nums, 1, nums.length - 1), rob(nums, 0, nums.length -2));
+    }
+    
+    public int rob(int[] nums, int start, int end) {
+        if (start == end) return nums[start];
+        if (end == start + 1) return Math.max(nums[start], nums[end]);
+        int pre1 = nums[start];
+        int pre2 = Math.max(nums[start], nums[start + 1]);
+        for (int i = start + 2; i <= end; i++) {
+            int curr = Math.max(pre1 + nums[i], pre2);
+            pre1 = pre2; 
+            pre2 = curr;
+        }
+        return pre2; 
+    }
+}
