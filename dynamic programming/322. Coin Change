@@ -1,0 +1,55 @@
+/* EXCEEDS TIME LIMIT */
+
+class Solution {
+    
+    public int count = Integer.MAX_VALUE; 
+    
+    public int coinChange(int[] coins, int amount) {
+        DFS(coins, 0, amount, 0); 
+        if (count == Integer.MAX_VALUE) return -1; 
+        return count; 
+    }
+    
+    public void DFS(int[] coins, int start, int amount, int curr) {
+        if (start >= coins.length) return; 
+        if (amount % coins[start] == 0) {
+            count = Math.min(curr + amount / coins[start], count);
+        }
+        int max = amount / coins[start];
+        for (int i = max; i >= 0; i--) {
+            DFS(coins, start + 1, amount - coins[start] * i, curr + i); 
+        }
+    }
+}
+
+
+/* DP Solution */ 
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        if (amount == 0 || coins == null || coins.length == 0) return 0; 
+        
+        int[] dp = new int[amount + 1];
+        dp[0] = 0; 
+        for (int i = 1; i < dp.length; i++) {
+            dp[i] = -1; 
+        }
+        
+        for (int i = 0; i < coins.length; i++) {
+            int curr = coins[i];
+            for (int j = amount; j >= curr; j--) {
+                int number = j / curr; 
+                for (int k = 0; k <= number; k++) {
+                    if (dp[j] != -1 && dp[j - curr * k] != -1) 
+                        dp[j] = Math.min(dp[j], dp[j - curr * k] + k);
+                    else if (dp[j - curr * k] != -1)
+                        dp[j] = dp[j - curr * k] + k; 
+                }
+            }
+        }
+        
+        return dp[amount];
+        
+        
+    }
+}
