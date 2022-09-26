@@ -26,19 +26,16 @@ class Solution {
 
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
+
+        int n = s.length();
         boolean[] dp = new boolean[s.length() + 1];
         dp[0] = true; 
         
-        for (int k = 0; k < s.length(); k++) {
+        for (int k = 1; k <= n; k++) {
             for (String curr : wordDict) {
-                if (k < curr.length() - 1) continue; 
-                for (int j = curr.length(); j <= s.length(); j++) {
-                    boolean hasWord = true;
-                    for (int i = j - curr.length(); i < j; i++) {
-                        if (s.charAt(i) != curr.charAt(i - j + curr.length())) hasWord = false; 
-                    }
-
-                    if (hasWord) dp[j] = dp[j] || dp[j - curr.length()];
+                if (curr.length() > k) continue; 
+                if (curr.equals(s.substring(k - curr.length(), k))) {
+                    dp[k] = dp[k] || dp[k - curr.length()];
                 }
             }
 
