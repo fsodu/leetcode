@@ -1,0 +1,16 @@
+class Solution {
+    public int change(int amount, int[] coins) {
+        if (coins == null || coins.length == 0) return 0; 
+        
+        int[] dp = new int[amount + 1];
+        dp[0] = 1; 
+        
+        for (int curr : coins) {
+            for (int j = curr; j <= amount; j++) {
+                dp[j] = dp[j] + dp[j - curr]; 
+            }
+        }
+        
+        return dp[amount];
+    }
+}
