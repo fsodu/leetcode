@@ -1,0 +1,49 @@
+/* exceeds time limit */
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        
+        return wordBreak(s, wordDict, 0);
+    }
+    
+    
+    public boolean wordBreak(String s, List<String> wordDict, int start) {
+        if (start == s.length()) return true; 
+        for (String curr : wordDict) {
+            if (start + curr.length() > s.length()) continue; 
+            boolean hasWord = true; 
+            for (int i = 0; i < curr.length(); i++) {
+                if (curr.charAt(i) != s.charAt(start + i)) hasWord = false;
+            }
+            if (hasWord) {
+                if (wordBreak(s, wordDict, start + curr.length())) return true; 
+            }
+        }
+        return false; 
+    }
+}
+
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true; 
+        
+        for (int k = 0; k < s.length(); k++) {
+            for (String curr : wordDict) {
+                if (k < curr.length() - 1) continue; 
+                for (int j = curr.length(); j <= s.length(); j++) {
+                    boolean hasWord = true;
+                    for (int i = j - curr.length(); i < j; i++) {
+                        if (s.charAt(i) != curr.charAt(i - j + curr.length())) hasWord = false; 
+                    }
+
+                    if (hasWord) dp[j] = dp[j] || dp[j - curr.length()];
+                }
+            }
+
+        }
+        
+        return dp[s.length()];
+    }
+}
