@@ -1,0 +1,51 @@
+class Solution {
+    public int minDistance(String word1, String word2) {
+        int[][] dp = new int[word1.length()][word2.length()];
+       
+        boolean equal1 = word1.charAt(0) == word2.charAt(0);
+        boolean equal2 = equal1; 
+        dp[0][0] = equal1 ? 0 : 2; 
+        
+        for (int j = 1; j < word2.length(); j++) {
+            equal1 = equal1 || word1.charAt(0) == word2.charAt(j);
+            dp[0][j] = equal1 ? j : j + 2;
+        }
+        
+        for (int i = 1; i < word1.length(); i++) {
+            equal2 = equal2 || word1.charAt(i) == word2.charAt(0);
+            dp[i][0] = equal2 ? i : i + 2;
+        }
+        
+        for (int i = 1; i < word1.length(); i++) {
+            for (int j = 1; j < word2.length(); j++) {
+                dp[i][j] = word1.charAt(i) == word2.charAt(j) ? 
+                    dp[i - 1][j - 1]: 
+                    Math.min(dp[i - 1][j], dp[i][j - 1]) + 1; 
+            }
+        }
+    
+        return dp[word1.length() - 1][word2.length() - 1];
+        
+    }
+}
+
+
+class Solution {
+    public int minDistance(String word1, String word2) {
+        
+        int[][] dp = new int[word1.length() + 1][word2.length() + 1];
+    
+        for (int i = 1; i < word1.length() + 1; i++) {
+            for (int j = 1; j < word2.length() + 1; j++) {
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1; 
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        
+        return word1.length() + word2.length() - 2 * dp[word1.length()][word2.length()];
+        
+    }
+}
