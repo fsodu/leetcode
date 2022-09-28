@@ -1,0 +1,23 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length <= 1)  return 0; 
+        
+        int N = prices.length;
+        int[][] buy = new int[N][3];
+        int[][] sell = new int[N][3];
+        
+        for (int i = 0; i < N; i++) {
+            for (int k = 2; k > 0; k--) {
+                if (i == 0) {
+                    buy[i][k] = -prices[0];
+                    sell[i][k] = 0; 
+                    continue;
+                }
+                buy[i][k] = Math.max(buy[i - 1][k], sell[i - 1][k - 1] - prices[i]);
+                sell[i][k] = Math.max(sell[i - 1][k], buy[i - 1][k] + prices[i]);
+            }
+        }
+        
+        return sell[N - 1][2];
+    }
+}
