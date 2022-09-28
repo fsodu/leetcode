@@ -1,0 +1,25 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length <= 1) return 0; 
+        
+        int N = prices.length; 
+        int[] buy = new int[N]; 
+        int[] rest1 = new int[N];
+        int[] sell = new int[N]; 
+        int[] rest2 = new int[N]; 
+        
+        buy[0] = rest1[0] = -prices[0];
+        sell[0] = rest2[0] = 0;
+        
+        for (int i = 1; i < N; i++) {
+            buy[i] = rest2[i - 1] - prices[i];
+            rest1[i] = Math.max(rest1[i - 1], buy[i - 1]);
+            sell[i] = Math.max(rest1[i - 1], buy[i - 1]) + prices[i];
+            rest2[i] = Math.max(rest2[i - 1], sell[i - 1]);
+        }
+        
+        return Math.max(rest2[N - 1], sell[N - 1]);
+        
+        
+    }
+}
