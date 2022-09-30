@@ -1,0 +1,17 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        int carry = 0;
+        int left = a.length() - 1, right = b.length() - 1; 
+        String sum = "";
+        
+        while (carry > 0 || left >= 0 || right >= 0) {
+            int curr = carry; 
+            if (left >= 0) curr += a.charAt(left--) - '0';
+            if (right >= 0) curr += b.charAt(right--) - '0';
+            sum = (char) (curr % 2 + '0') + sum; 
+            carry = curr / 2; 
+        }
+        
+        return sum; 
+    }
+}
