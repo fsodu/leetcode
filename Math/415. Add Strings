@@ -1,0 +1,16 @@
+class Solution {
+    public String addStrings(String num1, String num2) {
+        int carry = 0, left = num1.length() - 1, right = num2.length() - 1; 
+        StringBuilder sum = new StringBuilder();
+        
+        while (carry > 0 || left >= 0 || right >= 0) {
+            int curr = carry; 
+            if (left >= 0) curr += num1.charAt(left--) - '0'; 
+            if (right >= 0) curr += num2.charAt(right--) - '0';
+            sum.append(curr % 10);
+            carry = curr / 10; 
+        }
+        
+        return sum.reverse().toString();
+    }
+}
