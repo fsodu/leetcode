@@ -1,0 +1,17 @@
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        
+        if (head == null) return null;
+        if (head.next == null) return head; 
+        
+        ListNode curr = head.next; 
+        ListNode first = head; 
+        while (curr != null) {
+            head.next = curr.next; 
+            curr.next = first; 
+            first = curr; 
+            curr = head.next; 
+        }
+        return first; 
+    }
+}
