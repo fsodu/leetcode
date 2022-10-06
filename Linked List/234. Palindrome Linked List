@@ -1,0 +1,64 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null) return true; 
+        int size = 0; 
+        ListNode curr = head; 
+        Stack<Integer> stack = new Stack<>();
+        
+        while (curr != null) {
+            size++; 
+            stack.push(curr.val);
+            curr = curr.next;
+        }
+        
+        size /= 2; 
+        curr = head; 
+        while (size > 0) {
+            if (stack.pop() != curr.val) return false; 
+            curr = curr.next;
+            size--; 
+        }
+        
+        return true; 
+    }
+}
+
+// size O(N)
+
+
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) return true; 
+        ListNode slow = head, fast = head.next; 
+        
+        while (fast != null && fast.next != null) {
+            slow = slow.next; 
+            fast = fast.next.next; 
+        }
+        
+        ListNode second = reverse(slow.next);
+        ListNode first = head; 
+        
+        while (first != null && second != null) {
+            if (first.val != second.val) return false; 
+            first = first.next; 
+            second = second.next;
+        }
+        return true; 
+    }
+    
+    public ListNode reverse(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode curr = head; 
+        while (curr.next != null) {
+            ListNode temp = curr.next; 
+            curr.next = curr.next.next; 
+            temp.next = head; 
+            head = temp; 
+        }
+        return head; 
+    }
+}
+
+// Space O(1)
