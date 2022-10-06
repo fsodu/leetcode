@@ -13,7 +13,7 @@
 
 ### 数据结构相关
 
-- 链表
+- [链表 LinkedList](https://github.com/tianhuih/leetcode/tree/main/Linked%20List)
 - [树 Tree](https://github.com/tianhuih/leetcode/tree/main/Trees)
 - 栈和队列
 - 哈希表
