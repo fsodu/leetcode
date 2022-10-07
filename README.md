@@ -15,8 +15,8 @@
 
 - [链表 LinkedList](https://github.com/tianhuih/leetcode/tree/main/Linked%20List)
 - [树 Tree](https://github.com/tianhuih/leetcode/tree/main/Trees)
-- 栈和队列
-- 哈希表
+- [栈和队列](https://github.com/tianhuih/leetcode/tree/main/Stacks%20and%20Queues)
+- [哈希表](https://github.com/tianhuih/leetcode/tree/main/HashTable)
 - 字符串
 - 数组与矩阵
 - 图
