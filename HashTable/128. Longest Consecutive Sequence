@@ -1,0 +1,32 @@
+class Solution {
+ 
+    public int longestConsecutive(int[] nums) {
+        if (nums.length <= 1) return nums.length; 
+        Map<Integer, Integer> intervals = new HashMap<>();
+        int longest = 1; 
+
+        for (int i : nums) {
+            intervals.put(i, 1);
+        }
+        
+        for (int i : nums) {
+            if (!intervals.containsKey(i) || intervals.get(i) != 1) continue; 
+            int num = i; 
+            int len = 1; 
+            while (intervals.containsKey(num + 1)) {
+                int size = (int) intervals.get(num + 1);
+                intervals.remove(num + 1); 
+                len += size;
+                num += size;
+            }
+            if (len != 1) intervals.put(i, len);
+        }
+        
+        for (int i : intervals.keySet()) {
+            longest = Math.max(longest, intervals.get(i));
+        }
+        
+        return longest; 
+    }
+    
+}
