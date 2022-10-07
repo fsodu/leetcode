@@ -1,0 +1,22 @@
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+
+        Stack<Integer> indexes = new Stack<>();
+        int[] answer = new int[nums.length];
+        Arrays.fill(answer, -1);
+        
+        for (int i = 0; i < nums.length * 2; i++) {
+            int curr = i % nums.length; 
+            while (!indexes.isEmpty() && nums[curr] > nums[indexes.peek()]) {
+                int index = indexes.pop();
+                answer[index] = nums[curr]; 
+            }
+            if (i < nums.length) indexes.push(curr);
+        }
+        
+        return answer; 
+        
+    }
+}
+
+// time O(N)
