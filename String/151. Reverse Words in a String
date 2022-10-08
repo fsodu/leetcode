@@ -1,0 +1,53 @@
+class Solution {
+    public String reverseWords(String s) {
+        int start = 0, i = 0, end = s.length() - 1; 
+        boolean leadSpace = true; 
+        
+        while (i <= end) {
+            if (leadSpace && s.charAt(i) == ' ') {
+                s = delete(s, i);
+                end--;
+            } else if (s.charAt(i) == ' ') {
+                leadSpace = true; 
+                i++;
+            } else {
+                leadSpace = false; 
+                start = i; 
+                while (i + 1 < s.length() && s.charAt(i + 1) != ' ') {
+                    i++;
+                }
+                String word = reverse(s, start, i);
+                s = replace(s, start, word);
+                i++;
+            }
+        }
+
+        if (s.charAt(s.length() - 1) == ' ') s = delete(s, s.length() - 1);
+        return reverse(s, 0, s.length() - 1);
+    }
+    
+    public String delete(String s, int i) {
+        if (s == null || i >= s.length()) return "";  
+        String pre = (i == 0) ? "" : s.substring(0, i);
+        String post = (i == s.length() - 1) ? "" : s.substring(i + 1, s.length());
+        return pre + post; 
+    }
+    
+    public String replace(String s, int i, String word) {
+        int size = word.length(); 
+        if (size == 1) return s; 
+        String pre = (i == 0) ? "" : s.substring(0, i);
+        String post = (i + size == s.length()) ? "" : s.substring(i + size, s.length());
+        return pre + word + post; 
+    }
+    
+    public String reverse(String s, int start, int end) {
+        if (start == end) return "" + s.charAt(start);
+        String part = s.substring(start, end + 1);
+        String output = "";
+        for (int i = part.length() - 1; i >= 0; i--) {
+            output += "" + part.charAt(i);
+        }
+        return output; 
+    }
+}
