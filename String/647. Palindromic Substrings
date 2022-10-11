@@ -1,0 +1,51 @@
+class Solution {
+    public int countSubstrings(String s) {
+        int count = 0; 
+        for (int i = 0; i < s.length(); i++) {
+            count += extend(s, i, i);
+            if (i > 0) count += extend(s, i - 1, i);
+        }
+        return count; 
+    }
+    
+    public int extend(String s, int a, int b) {
+        if (s.charAt(a) != s.charAt(b)) return 0; 
+        int start = a, end = b; 
+        int count = 1; 
+        while (start > 0 && end < s.length() - 1) {
+            start--; 
+            end++;
+            if (s.charAt(start) != s.charAt(end)) break; 
+            count++;
+        }
+        return count; 
+    }
+}
+
+// start from middle
+
+class Solution {
+    public int countSubstrings(String s) {
+        int num = s.length();
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (isPalindromic(s.substring(j, i + 1))) num++;
+            }
+        }
+        
+        return num; 
+        
+    }
+    
+    public boolean isPalindromic(String s) {
+        int a = 0, b = s.length() - 1; 
+        while (a < b) {
+            if (s.charAt(a++) != s.charAt(b--)) return false; 
+        }
+        return true; 
+    }
+}
+
+// N^2 solution
+
+
