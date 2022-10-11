@@ -1,0 +1,61 @@
+// compare first half and second half
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x == 0) {
+            return true;
+        }
+        if (x < 0 || x % 10 == 0) {
+            return false;
+        }
+        int right = 0;
+        while (x > right) {
+            right = right * 10 + x % 10;
+            x /= 10;
+        }
+        return x == right || x == right / 10;
+    }
+}
+
+
+// count int length
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) return false; 
+        int div = x / 10; 
+        int len = 1; 
+        
+        while (div != 0) {
+            div = div / 10; 
+            len++;
+        }
+        
+        for (int i = 0; i < len / 2; i++) {
+            if (get(x, i, len) != get(x, len - i - 1, len)) return false;
+        }
+        
+        return true;
+    }
+    
+    public int get(int x, int i, int len) {
+        return (int) (x / Math.pow(10, (len - i - 1))) % 10;
+    }
+}
+
+
+// convert int to string
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) return false; 
+        String s = Integer.toString(x); 
+        int start = 0, end = s.length() - 1; 
+        while (start < end) {
+            if (s.charAt(start++) != s.charAt(end--)) return false; 
+        }
+        return true; 
+    }
+}
+
+
