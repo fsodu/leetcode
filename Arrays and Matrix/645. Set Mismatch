@@ -1,0 +1,16 @@
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int n = nums.length; 
+        boolean[] visited = new boolean[n + 1];
+        int[] result = new int[2];
+        for(int i : nums) {
+            if (visited[i]) result[0] = i; 
+            visited[i] = true; 
+        }
+        for (int i = 1; i <= n; i++) {
+            if (!visited[i]) result[1] = i; 
+        }
+        
+        return result; 
+    }
+}
