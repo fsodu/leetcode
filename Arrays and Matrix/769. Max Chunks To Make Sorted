@@ -1,0 +1,59 @@
+// find the right-most number
+
+public int maxChunksToSorted(int[] arr) {
+    if (arr == null) return 0;
+    int ret = 0;
+    int right = arr[0];
+    for (int i = 0; i < arr.length; i++) {
+        right = Math.max(right, arr[i]);
+        if (right == i) ret++;
+    }
+    return ret;
+}
+
+
+
+// use intervals
+
+class Solution {
+    public int maxChunksToSorted(int[] arr) {
+        
+        List<int[]> intervals = new ArrayList<>();
+        
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == -1) continue;
+            int min = i, max = i;
+            int curr = i;
+            while (arr[curr] != -1) {
+                min = Math.min(min, curr);
+                max = Math.max(max, curr);
+                int next = arr[curr];
+                arr[curr] = -1; 
+                curr = next; 
+            }
+            intervals.add(new int[]{min, max});
+        }
+        
+        Collections.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return a[0] > b[0] ? 1 : (a[0] == b[0] ? 0 : -1);
+            }
+        });
+            
+        int cnt = 1; 
+        int[] last = intervals.remove(0);
+        
+        while (!intervals.isEmpty()) {
+            int[] curr = intervals.remove(0);
+            if (curr[0] > last[1]) {
+                cnt++;
+                last = curr;
+            } else {
+                last[1] = Math.max(curr[1], last[1]);
+            }
+        }
+        return cnt; 
+        
+    }
+}
