@@ -1,25 +1,26 @@
 class Solution {
     public int findShortestSubArray(int[] nums) {
-        int[][] degrees = new int[50000][3]; 
+        Map<Integer, int[]> map = new HashMap<>();
         int max = 0; 
-        
         for (int i = 0; i < nums.length; i++) {
-            int[] curr = degrees[nums[i]];
+            int[] curr = map.getOrDefault(nums[i], new int[3]);
             if (curr[2] == 0) {
-                curr[0] = curr[1] = i; 
+                curr[0] = curr[1] = i;
             } else {
-                curr[0] = Math.min(curr[0], i); 
-                curr[1] = Math.max(curr[1], i);  
+                curr[1] = Math.max(curr[1], i);
             }
             curr[2]++;
-            max = Math.max(max, curr[2]); 
+            max = Math.max(max, curr[2]);
+            map.put(nums[i], curr);
         }
         
         int min = Integer.MAX_VALUE;
-        
-        for (int[] curr : degrees) {
-            if (curr[2] == max) min = Math.min(min, curr[1] - curr[0] + 1);
+        for (int[] curr : map.values()) {
+            if (curr[2] == max) {
+                min = Math.min(min, curr[1] - curr[0] + 1);
+            }
         }
+        
         return min; 
     }
 }
