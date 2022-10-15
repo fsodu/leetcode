@@ -1,0 +1,55 @@
+// start from 1 - (k+1)
+
+class Solution {
+    public int[] constructArray(int n, int k) {
+        int[] ret = new int[n];
+        ret[0] = 1;
+        for (int i = 1, interval = k; i <= k; i++, interval--) {
+            ret[i] = i % 2 == 1 ? ret[i - 1] + interval : ret[i - 1] - interval;
+        }
+        for (int i = k + 1; i < n; i++) {
+            ret[i] = i + 1;
+        }
+        return ret;
+    }
+}
+
+// start from middle 
+
+class Solution {
+    public int[] constructArray(int n, int k) {
+        if (n == 1) return new int[]{1}; 
+        
+        int[] answer = new int[n];
+        if (k == 1) {
+            for (int i = 0; i < n; i++) {
+                answer[i] = i + 1; 
+            }
+            return answer; 
+        }
+        
+        int middle = (n + 1)/ 2; 
+        answer[0] = middle; 
+        
+        for (int i = 1; i < k; i++) {
+            answer[i] = i % 2 == 1 ? answer[i - 1] + i : answer[i - 1] - i; 
+        }
+        
+        boolean odd = (k - 1) % 2 == 1; 
+        int index = k; 
+        int first = odd ? n - answer[index - 1] : answer[index - 1] - 1; 
+        
+        for (int i = 1; i <= first; i++) {
+            answer[index] = odd ? answer[index - 1] + 1 : answer[index - 1] - 1;  
+            index++;
+        }
+        
+        for (int i = index; i < n; i++) {
+            answer[i] = odd ? i - index + 1 : n + index - i; 
+        }
+        
+        return answer; 
+        
+        
+    }
+}
