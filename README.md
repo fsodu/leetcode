@@ -18,6 +18,6 @@
 - [栈和队列 Stacks and Queues](https://github.com/tianhuih/leetcode/tree/main/Stacks%20and%20Queues)
 - [哈希表 Hash Table](https://github.com/tianhuih/leetcode/tree/main/HashTable)
 - [字符串 String](https://github.com/tianhuih/leetcode/tree/main/String)
-- 数组与矩阵
+- [数组与矩阵 Arrays and Matrix](https://github.com/tianhuih/leetcode/tree/main/Arrays%20and%20Matrix)
 - 图
 - 位运算
