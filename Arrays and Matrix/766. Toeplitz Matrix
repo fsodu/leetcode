@@ -1,0 +1,18 @@
+class Solution {
+    public boolean isToeplitzMatrix(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        int diagonals = m + n - 1; 
+        
+        for (int i = 0; i < diagonals; i++) {
+            int row = Math.max(0, m - i - 1);
+            int col = Math.max(0, i - m + 1);
+            int curr = matrix[row][col];
+            while (row < m && col < n) {
+                if (matrix[row++][col++] != curr) return false; 
+            }
+        }
+        
+        return true; 
+    }
+}
+
