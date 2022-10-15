@@ -1,0 +1,21 @@
+class Solution {
+    public int arrayNesting(int[] nums) {
+        int n = nums.length;
+        int max = 0; 
+        
+        for (int k = 0; k < n; k++) {
+            int curr = k; 
+            int len = 0; 
+            while (nums[curr] != -1) {
+                len++;
+                int next = nums[curr];
+                nums[curr] = -1; 
+                curr = next;
+                
+            }
+            max = Math.max(max, len);
+        }
+        
+        return max; 
+    }
+}
