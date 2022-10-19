@@ -1,0 +1,36 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if (numCourses <= 1) return true; 
+        
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        
+        for (int[] edge : prerequisites) {
+            List<Integer> pre = map.getOrDefault(edge[0], new ArrayList<Integer>());
+            pre.add(edge[1]);
+            map.put(edge[0], pre);
+        }
+        
+        boolean visited[] = new boolean[numCourses]; 
+        for (int curr : map.keySet()) {
+            if (!DFS(map, curr, visited, new boolean[numCourses])) return false;
+        }
+        return true;
+        
+    }
+    
+    public boolean DFS(Map<Integer, List<Integer>> map, int curr, boolean[] visited, boolean[] visiting) {
+        if (visiting[curr]) return false; 
+        if (visited[curr]) return true;
+        
+        List<Integer> pres = map.get(curr); 
+        if (pres != null) {
+            for (int pre : pres) {
+                visiting[curr] = true; 
+                if (!DFS(map, pre, visited, visiting)) return false;
+                visiting[curr] = false; 
+            }
+        }
+        visited[curr] = true; 
+        return true; 
+    }
+}
