@@ -1,0 +1,42 @@
+class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+    
+        Queue<Integer> order = new ArrayDeque<>();
+        List<Integer>[] graph = new List[numCourses];
+        
+        for (int i = 0; i < numCourses; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        for (int[] curr : prerequisites) {
+            graph[curr[0]].add(curr[1]);
+        }
+        
+        for (int i = 0; i < numCourses; i++) {
+            if (!DFS(graph, i, order, new boolean[numCourses])) return new int[0];
+        }
+        
+        int[] result = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            result[i] = order.poll();
+        }
+        
+        return result;
+    }
+    
+    public boolean DFS(List<Integer>[] graph, int curr, Queue order, boolean[] visiting) {
+        if (order.contains(curr)) return true; 
+        if (visiting[curr]) return false; 
+        
+        List<Integer> pres = graph[curr];
+        if (!pres.isEmpty()) {
+            for (int pre : pres) {
+                visiting[curr] = true; 
+                if (!DFS(graph, pre, order, visiting)) return false; 
+                visiting[curr] = false; 
+            }
+        }
+        order.offer(curr);
+        return true;
+    }
+    
+}
