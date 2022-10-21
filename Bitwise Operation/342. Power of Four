@@ -1,0 +1,32 @@
+class Solution {
+    public boolean isPowerOfFour(int n) {
+        return n > 0 && (n & (n - 1)) == 0 && (n & 0b01010101010101010101010101010101) != 0; 
+    }
+}
+
+
+class Solution {
+    public boolean isPowerOfFour(int n) {
+        return n > 0 && (n & (n - 1)) == 0 && Integer.bitCount(n & 0b01010101010101010101010101010101) == 1; 
+    }
+}
+
+class Solution {
+    public boolean isPowerOfFour(int n) {
+        return n > 0 && Integer.toString(n, 4).matches("10*");
+    }
+}
+
+class Solution {
+    public boolean isPowerOfFour(int n) {
+        if (n < 0) return false; 
+        int index = 0; 
+        int pow4 = 1; 
+        while (index < 32) {
+            if (n == pow4) return true; 
+            pow4 <<= 2; 
+            index += 2; 
+        }
+        return false; 
+    }
+}
