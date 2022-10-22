@@ -1,0 +1,17 @@
+class Solution {
+    public int findComplement(int num) {
+        int n = num;
+        int index = 0; 
+        while (num > 0) {
+            index++;
+            num >>= 1; 
+        }
+        int comp = 1; 
+        while (index > 1) {
+            comp <<= 1; 
+            comp += 1; 
+            index--;
+        }
+        return n ^ comp;
+    }
+}
