@@ -1,0 +1,36 @@
+class Solution {
+    public int[] countBits(int num) {
+        int[] ret = new int[num + 1];
+        for(int i = 1; i <= num; i++){
+            ret[i] = ret[i & (i-1)] + 1;
+        }
+        return ret;
+    }
+}
+
+class Solution {
+    public int[] countBits(int n) {
+        int[] ret = new int[n + 1];
+        ret[0] = 0; 
+        int pow2 = 0; 
+        for (int i = 1; i <= n; i++) {
+            if (i >= Math.pow(2, pow2 + 1)) pow2++;
+            ret[i] = ret[i - (int)Math.pow(2, pow2)] + 1; 
+        }
+        return ret; 
+    }
+}
+
+
+
+// Dumb solution 
+
+class Solution {
+    public int[] countBits(int n) {
+        int[] ret = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            ret[i] = Integer.bitCount(i);
+        }
+        return ret; 
+    }
+}
