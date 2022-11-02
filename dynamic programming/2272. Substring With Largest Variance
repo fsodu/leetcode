@@ -1,0 +1,63 @@
+// Kadane's Algorithm
+// use max(c1) - min(c2) pairs and count the max variance 
+
+class Solution {
+    public int largestVariance(String s) {
+        int result = 0; 
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        for (char c1 : map.keySet()) {
+            for (char c2 : map.keySet()) {
+                if (c1 == c2) continue; 
+                if (map.get(c1) == 1 && map.get(c2) == 1) continue; 
+                int cnt1 = 0, cnt2 = 0, cnt2remaining = map.get(c2); 
+                for (char curr : s.toCharArray()) {
+                    if (curr == c1) cnt1++;
+                    if (curr == c2) {
+                        cnt2++;
+                        cnt2remaining--;
+                    }
+                    if (cnt1 < cnt2 && cnt2remaining > 0) {
+                        cnt1 = 0; 
+                        cnt2 = 0; 
+                    }
+                    if (cnt1 > 0 && cnt2 > 0) {
+                        result = Math.max(result, cnt1 - cnt2);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
+
+
+// N^2 Solution 
+
+class Solution {
+    public int largestVariance(String s) {
+        if (s.length() == 1) return 0;
+        
+        int result = 0; 
+        
+        for (int i = 0; i < s.length() - 1; i++) {
+            int[] chars = new int[26];
+            chars[s.charAt(i) - 'a']++;
+            for (int j = i + 1; j < s.length(); j++) {
+                chars[s.charAt(j) - 'a']++;
+                int min = s.length(); 
+                int max = 1; 
+                for (int c : chars) {
+                    if (c == 0) continue; 
+                    min = Math.min(min, c); 
+                    max = Math.max(max, c); 
+                }
+                result = Math.max(result, max - min); 
+            }
+        }
+        return result; 
+        
+    }
+}
