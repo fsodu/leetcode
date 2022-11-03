@@ -1,0 +1,41 @@
+class Solution {
+    public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
+        Map<String, List<int[]>> pairs = new HashMap<>(); 
+        for (int i = 0; i < username.length; i++) {
+            String curr = username[i]; 
+            List visited = pairs.getOrDefault(curr, new ArrayList<>()); 
+            visited.add(new int[]{timestamp[i], i}); 
+            pairs.put(curr, visited); 
+        }
+        String res = "";
+        Map<String, Integer> count = new HashMap<>(); 
+        for (String user : pairs.keySet()) {
+            Set<String> currPattern = new HashSet<>();
+            List<int[]> visited = pairs.get(user);
+            Collections.sort(visited, (a, b)->(a[0] - b[0]));
+            int n = visited.size(); 
+            if (n < 3) continue; 
+            for (int i = 0; i < n - 2; i++) {
+                for (int j = i + 1; j < n - 1; j++) {
+                    for (int k = j + 1; k < n; k++) {
+                        String curr = website[visited.get(i)[1]] + " " + website[visited.get(j)[1]] + " " 
+                                        + website[visited.get(k)[1]]; 
+                        if (!currPattern.contains(curr)) {
+                            count.put(curr, count.getOrDefault(curr, 0) + 1);
+                            currPattern.add(curr);
+                        }
+                        if (res == "" || count.get(curr) > count.get(res) 
+                            || (count.get(curr) == count.get(res) && curr.compareTo(res) < 0)) {
+                            res = curr; 
+                        }
+                    }
+                }
+            }
+        }
+        List<String> result = new ArrayList<>(); 
+        for (String site : res.split(" ")) {
+            result.add(site); 
+        }
+        return result; 
+    }
+}
