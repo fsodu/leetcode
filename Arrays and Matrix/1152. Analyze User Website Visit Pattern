@@ -7,10 +7,10 @@ class Solution {
             visited.add(new int[]{timestamp[i], i}); 
             pairs.put(curr, visited); 
         }
-        String res = "";
+        String res = "";        //use String so it's easy to compare words lexicographically
         Map<String, Integer> count = new HashMap<>(); 
         for (String user : pairs.keySet()) {
-            Set<String> currPattern = new HashSet<>();
+            Set<String> currPattern = new HashSet<>();      // avoid repetition when the user visits same 3 websites multiple times
             List<int[]> visited = pairs.get(user);
             Collections.sort(visited, (a, b)->(a[0] - b[0]));
             int n = visited.size(); 
