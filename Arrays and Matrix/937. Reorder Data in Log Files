@@ -1,0 +1,66 @@
+class Solution {
+    public String[] reorderLogFiles(String[] logs) {
+        Arrays.sort(logs, new Comparator<String>(){
+            @Override
+            public int compare(String a, String b) {
+                int space1 = a.indexOf(" "); 
+                int space2 = b.indexOf(" "); 
+                char first1 = a.charAt(space1 + 1);
+                char first2 = b.charAt(space2 + 1);
+                if (first1 <= '9' && first2 <= '9') return 0; 
+                if (first1 <= '9') return 1; 
+                if (first2 <= '9') return -1; 
+                
+                String word1 = a.substring(space1 + 1, a.length()); 
+                String word2 = b.substring(space2 + 1, b.length()); 
+                if (word1.compareTo(word2) == 0) {
+                    String id1 = a.substring(0, space1); 
+                    String id2 = b.substring(0, space2);
+                    return id1.compareTo(id2);
+                }
+                return word1.compareTo(word2);
+            }
+        });
+          
+        return logs; 
+    }
+}
+
+class Solution {
+    public String[] reorderLogFiles(String[] logs) {
+        Queue<Integer> digits = new ArrayDeque<>();
+        List<String[]> letters = new ArrayList<>();
+        for (int i = 0; i < logs.length; i++) {
+            String curr = logs[i]; 
+            String[] splitted = curr.split(" "); 
+            char first = splitted[1].charAt(0);
+            if (first - 'a' >= 0 && first - 'a' < 26) {
+                String id = splitted[0];
+                String content = curr.substring(id.length() + 1, curr.length());
+                letters.add(new String[]{content, id}); 
+            } else {
+                digits.offer(i); 
+            }
+        }
+        Collections.sort(letters, new Comparator<String[]>(){
+            @Override
+            public int compare(String[] a, String[] b) {
+                int content = a[0].compareTo(b[0]); 
+                int id = a[1].compareTo(b[1]); 
+                return content > 0 ? 1 : (content < 0 ? -1 : (id > 0 ? 1 : -1));
+            }
+        });
+
+        String[] result = new String[logs.length]; 
+        int index = 0; 
+        for (String[] word : letters) {
+            result[index++] = word[1] + " " + word[0]; 
+        }
+        for (int i : digits) {
+            result[index++] = logs[i];
+        }
+
+        return result;
+        
+    }
+}
